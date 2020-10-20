@@ -1,0 +1,119 @@
+https://labs.play-with-docker.com/
+
+#help 
+docker help
+docker image help 
+docker container help 
+docker run --help 
+
+#listar imagens e containers
+docker images ls 
+docker container ps 
+#lista todos, inclusives parados
+docker container ps -a 
+docker image ps -a 
+
+#buscar imagem no registry 
+docker search 'nomeimagem'
+#comando para baixar imagem
+docker pull 'nomeimagem'
+#baixa uma versão especifica 
+docker pull 'nomeimagem':6.0 
+
+#Executar um container 
+docker run 'nomeimagem'
+
+#/////// PWD
+https://labs.play-with-docker.com/
+
+#verificar a versão do Linux
+cat /proc/version.
+cat /etc/*-release | grep PRETTY.
+
+docker pull nginx
+docker run nginx
+
+##Exemplo Proffy-web
+docker pull acoeelho/proffy-web
+docker run -d -p 1234:80 --name proffy acoeelho/proffy-web 
+
+#parar container 
+docker stop 'id_container'  
+
+#inspecionar uma imagem 
+docker inspect 'nomeimagem'
+
+#remover imagem
+docker image remove 'id_imagem'
+docker rmi 'id_imagem' 
+
+#remover container
+docker container remove 'id_docker'
+docker image rm 'id_docker' -f
+
+#////////////////////////////
+###parametros
+-p #define uma porta. ex 8080:80
+-d #criar e executar em bakground
+--name #nome para o container
+--rm #container auto destrutivos
+-f #forçar um processo 
+-it cria um container no modo interativo
+
+#Exemplos
+docker pull alpine
+docker run -it --rm alpine 
+#Exemplod de interação - ver versão 
+uname -a
+cat /etc/*-release | grep PRETTY
+
+docker pull acoeelho/proffy-web
+docker run -d -p 1234:80 --name proffy acoeelho/proffy-web  
+
+#////////////////////////////
+##DOCKERFILE
+FROM ubuntu:18.04
+RUN apt-get update 
+RUN apt-get install figlet toilet -y
+RUN figlet QARENTENA \ Sucesso
+
+docker image build -t ex-qarentena .
+docker images | grep qarentena
+docker container run -it ex-qarentena
+apt-get install tree
+figlet Deem joinha!!!
+
+#////////////////////////////
+#SUBIR IMAGEM NO REPOSITORIO - REGISTRY
+#login no registry - docker hub
+docker login --username=fabiokaia
+#build de uma imagem com tag
+docker image build -t ex-push-qa .
+
+#verificar se a imagem foi criada
+docker images | grep push-qa 
+
+#buscar
+docker image tag ex-push-qa fabiokaia/ex-push-qa:1.0
+#push
+docker push fabiokaia/ex-build-copy:1.0
+
+#////////////////////////////
+https://docs.docker.com/samples/
+
+#docker compose - subir 
+docker-compose up -d 
+#verifica containers composers apenas
+docker-compose ps
+#para o container
+docker-compose down
+
+
+#comandos linux 
+free 
+uname -a
+top 
+man
+apt-get install tree
+apt-get install openjdk-8-jdk -y
+touch arquivo-de-boas-vindas
