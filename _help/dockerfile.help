@@ -11,7 +11,7 @@ docker images ls
 docker container ps 
 #lista todos, inclusives parados
 docker container ps -a 
-docker image ps -a 
+docker image ls -a 
 
 #buscar imagem no registry 
 docker search 'nomeimagem'
@@ -22,6 +22,11 @@ docker pull 'nomeimagem':6.0
 
 #Executar um container 
 docker run 'nomeimagem'
+
+#comandos linux
+free 
+uname -a
+top 
 
 #/////// PWD
 https://labs.play-with-docker.com/
@@ -60,43 +65,48 @@ docker image rm 'id_docker' -f
 -f #forçar um processo 
 -it cria um container no modo interativo
 
+
 #Exemplos
 docker pull alpine
-docker run -it --rm alpine 
+docker run --name alpine-qa -it --rm alpine 
 #Exemplod de interação - ver versão 
 uname -a
-cat /etc/*-release | grep PRETTY
 
-docker pull acoeelho/proffy-web
-docker run -d -p 1234:80 --name proffy acoeelho/proffy-web  
+docker pull wordpress
+docker run -d -p 1234:80 --name wp-qa  wordpress
 
 #////////////////////////////
 ##DOCKERFILE
 FROM ubuntu:18.04
 RUN apt-get update 
 RUN apt-get install figlet toilet -y
-RUN figlet QARENTENA \ Sucesso
+RUN figlet QARENTENA Sucesso
 
 docker image build -t ex-qarentena .
 docker images | grep qarentena
 docker container run -it ex-qarentena
 apt-get install tree
-figlet Deem joinha!!!
+figlet "# SomosTodosQA" 
+
 
 #////////////////////////////
 #SUBIR IMAGEM NO REPOSITORIO - REGISTRY
+#build de uma imagem com tag
+docker image build -t qarentena .
+
 #login no registry - docker hub
 docker login --username=fabiokaia
-#build de uma imagem com tag
-docker image build -t ex-push-qa .
 
 #verificar se a imagem foi criada
-docker images | grep push-qa 
+docker images | grep qarentena
 
 #buscar
-docker image tag ex-push-qa fabiokaia/ex-push-qa:1.0
+docker image tag qarentena fabiokaia/qarentena:1.0
 #push
-docker push fabiokaia/ex-build-copy:1.0
+docker push fabiokaia/qarentena:1.0
+
+
+
 
 #////////////////////////////
 https://docs.docker.com/samples/
@@ -117,3 +127,7 @@ man
 apt-get install tree
 apt-get install openjdk-8-jdk -y
 touch arquivo-de-boas-vindas
+
+
+#gerar sSSH-key
+https://secure.vexxhost.com/billing/index.php/knowledgebase/171/How-can-I-generate-SSH-keys-on-Mac-OS-X.html
