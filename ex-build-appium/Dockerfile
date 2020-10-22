@@ -9,32 +9,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 #=============
 WORKDIR /root
 
-#==================
-# General Packages
-#------------------
-# openjdk-8-jdk
-#   Java
-# ca-certificates
-#   SSL client
-# tzdata
-#   Timezone
-# zip
-#   Make a zip file
-# unzip
-#   Unzip zip file
-# curl
-#   Transfer data from or to a server
-# wget
-#   Network downloader
-# libqt5webkit5
-#   Web content engine (Fix issue in Android)
-# libgconf-2-4
-#   Required package for chrome and chromedriver to run on Linux
-# xvfb
-#   X virtual framebuffer
-# gnupg
-#   Encryption software. It is needed for nodejs
-#==================
 RUN apt-get -qqy update && \
     apt-get -qqy --no-install-recommends install \
     openjdk-8-jdk \
